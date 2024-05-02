@@ -1,0 +1,32 @@
+syntax = "proto3"; // Specify that this file is using Protocol Buffers version 3 syntax
+
+package user; // Declare the package name for the generated Go code
+
+option go_package = "github.com/Zhambyl004/Assigment4/proto/user"; // Specify the Go package for the generated code
+
+// Define a message for a user
+message User {
+    int32 id = 1; // Unique identifier for the user
+    string name = 2; // User's name
+    string email = 3; // User's email address
+}
+
+// Define a message for a user ID
+message UserID {
+    int32 id = 1; // User ID
+}
+
+// Define an empty message
+message Empty {}
+
+// Define a service for user management
+service UserService {
+    // RPC method to add a user
+    rpc AddUser(User) returns (UserID);
+
+    // RPC method to get a user by ID
+    rpc GetUser(UserID) returns (User);
+
+    // RPC method to list all users
+    rpc ListUsers(Empty) returns (stream User);
+}
